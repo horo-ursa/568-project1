@@ -10,14 +10,14 @@ public class ScoreUI : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        GameObject g = GameObject.Find("GameManager");
-        globalObj = g.GetComponent<GameManager>();
+        /*GameObject g = GameObject.Find("GameManager");
+        globalObj = g.GetComponent<GameManager>();*/
         //scoreText = gameObject.GetComponent<Text>();
     }
     // Update is called once per frame
     void Update()
     {
         //Debug.Log(globalObj.score);
-        scoreText.text = globalObj.score.ToString();
+        scoreText.text = GameManager.instance.score.ToString();
     }
 }

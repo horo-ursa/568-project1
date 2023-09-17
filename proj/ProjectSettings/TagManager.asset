@@ -9,6 +9,8 @@ TagManager:
   - Alien
   - Barrier
   - UFO
+  - Floor
+  - DiedAlien
   layers:
   - Default
   - TransparentFX

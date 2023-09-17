@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TitleScript : MonoBehaviour
 {
@@ -21,7 +22,7 @@ void Start()
         // The scene needs to be added into build setting to be loaded!
         if (GUILayout.Button("New Game"))
         {
-            Application.LoadLevel("GameplayScene");
+            SceneManager.LoadScene("GameplayScene");
         }
         if (GUILayout.Button("High score"))
         {

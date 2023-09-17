@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameManager gm;
+    public int damage = 10;
     void Start()
     {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -14,8 +15,8 @@ public class Projectile : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            Player roid = collider.gameObject.GetComponent<Player>();
-            gm.EndGame();
+            GameManager.instance.HP -= damage;
+            Destroy(gameObject);
         }
         else if (collider.CompareTag("Barrier"))
         {
@@ -25,7 +26,7 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            Debug.Log("Collided with " + collider.tag);
+            //Debug.Log("Collided with " + collider.tag);
         }
     }
     // Update is called once per frame

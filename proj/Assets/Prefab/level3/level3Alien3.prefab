@@ -78,6 +78,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4388063611836051347, guid: 3322c842c425b864ea8eb933bff766ca, type: 3}
       insertIndex: -1
       addedObject: {fileID: -6037210549626496806}
+    - targetCorrespondingSourceObject: {fileID: 4388063611836051347, guid: 3322c842c425b864ea8eb933bff766ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3615787924225735281}
   m_SourcePrefab: {fileID: 100100000, guid: 3322c842c425b864ea8eb933bff766ca, type: 3}
 --- !u!1 &720812156812695518 stripped
 GameObject:
@@ -96,10 +99,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e8783d83e27e4488673ba88576a9d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointValue: 0
+  pointValue: 90
+  damage: 35
   deathExplosion: {fileID: 1052565355964372707, guid: 60ba9a730b077ab4d8ef57b6cab09c3f, type: 3}
   deathKnell: {fileID: 8300000, guid: ca0fc9923790fce41a655a77a91c4559, type: 3}
+  projectile: {fileID: 592166966341909143, guid: f2924ef56d55b9346998575fb9c3e066, type: 3}
+  bulletSpeed: -8
   isAlive: 1
+  dieMat: {fileID: 2100000, guid: 385dca9356b1734429c74257922312f4, type: 2}
 --- !u!65 &-6037210549626496806
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -107,7 +114,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720812156812695518}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: cef22cfaf71f51544b20650c9c297816, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -121,3 +128,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8.796676, y: 2.4607563, z: 10.611299}
   m_Center: {x: 0, y: -0.00000035762787, z: -0.000015735626}
+--- !u!54 &3615787924225735281
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720812156812695518}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 94
+  m_CollisionDetection: 1

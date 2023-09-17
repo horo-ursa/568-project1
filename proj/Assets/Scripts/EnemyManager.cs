@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class EnemyManager : MonoBehaviour
 
     private Vector3 initialPosition;
     private bool movingRight = true;
-    private List<GameObject> mAliens = new List<GameObject>();
+    private List<GameObject> mAliens;
 
     public float shootingCooldown = 3.0f;
     private float lastShootingTime = 2.0f;
@@ -35,7 +36,7 @@ public class EnemyManager : MonoBehaviour
     private void Awake()
     {
         initialPosition = transform.position;
-        
+        mAliens = new List<GameObject>();
     }
 
     // Start is called before the first frame update
@@ -60,25 +61,28 @@ public class EnemyManager : MonoBehaviour
             {
                 Vector3 position = new Vector3(
                     initialPosition.x + (j * horizontalSpacing),
-                    initialPosition.y,
+                    0,
                     initialPosition.z - (i * verticalSpacing)
                 );
 
                 // Get the appropriate alien ship type based on the current row
                 var alien = Instantiate(alienShips[i % alienShips.Length], position, Quaternion.Euler(0, 180, 0), transform);
-
                 mAliens.Add(alien);
             }
         }
     }
 
+    public void removeAlien(GameObject obj)
+    {
+        mAliens.Remove(obj);
+    }
 
     private bool killPlayer()
     {
 
         for (int i = 0; i < mAliens.Count; ++i)
         {
-            if (mAliens[i] != null)
+            if (mAliens[i] != null && mAliens[i].GetComponent<Alien>().isAlive == true)
             {
                 if (mAliens[i].transform.position.z <= 1) return true;
             }
@@ -89,15 +93,14 @@ public class EnemyManager : MonoBehaviour
     private void shootProjectile()
     {
         bool isValidate = false;
-        while (!isValidate)
+        while (!isValidate && !allKilled())
         {
-            int rand = Random.Range(0, mAliens.Count);
+            int rand = Random.Range(0, mAliens.Count - 1);
             if (mAliens[rand] != null)
             {
                 isValidate = true;
-                var shootPos = mAliens[rand].transform.position;
-                var proj = Instantiate(projectile, shootPos, Quaternion.identity);
-                proj.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, bulletSpeed);
+                Alien alien = mAliens[rand].GetComponent<Alien>();
+                alien.shoot();
             }
         }
     }
@@ -118,47 +121,63 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (movingRight)
+        if (allKilled())
         {
-            transform.position += new Vector3(horizontalSpeed * Time.deltaTime, 0, 0);
-            if (transform.position.x >= boundary)
+            if(SceneManager.GetActiveScene().buildIndex == SceneId.LEVEL3)
             {
-                Debug.Log("out of boundary");
-                movingRight = false;
-                transform.position += new Vector3(0,0 , -verticalSpeed);
+                GameManager.instance.WinGame();
             }
+            else
+            {
+                GameManager.instance.prevLevel = SceneManager.GetActiveScene().buildIndex;
+                SceneManager.LoadScene(SceneId.STORE);
+            }
+            
+            //GameManager.instance.LoadNextLevel();
         }
         else
         {
-            transform.position -= new Vector3(horizontalSpeed * Time.deltaTime, 0, 0);
-            if (transform.position.x <= -boundary + 5)
+            if (movingRight)
             {
-                movingRight = true;
-                transform.position += new Vector3(0, 0, -verticalSpeed);
+                transform.position += new Vector3(horizontalSpeed * Time.deltaTime, 0, 0);
+                if (transform.position.x >= boundary)
+                {
+                    Debug.Log("out of boundary");
+                    movingRight = false;
+                    transform.position += new Vector3(0, 0, -verticalSpeed);
+                }
+            }
+            else
+            {
+                transform.position -= new Vector3(horizontalSpeed * Time.deltaTime, 0, 0);
+                if (transform.position.x <= -boundary + 5)
+                {
+                    movingRight = true;
+                    transform.position += new Vector3(0, 0, -verticalSpeed);
+                }
+            }
+
+            if (killPlayer())
+            {
+                GameManager.instance.EndGame();
+            }
+            //generate projectiles
+            if (Time.time - lastShootingTime >= (shootingCooldown + Random.Range(-1.5f, 1.5f)))
+            {
+                shootProjectile();
+                lastShootingTime = Time.time;
+            }
+            //generate UFO
+            if (Time.time - UFOLastTime >= (UFOCooldown + Random.Range(-3f, 3f)))
+            {
+                Vector3 offset = new Vector3(0.0f, 0.0f, 1.0f);
+                var go = Instantiate(UFO, initPos + offset, Quaternion.Euler(0, 90, 0)) as GameObject;
+                var ufo = go.GetComponent<UFO>();
+                ufo.initPos = go.transform.position;
+                ufo.GetComponent<Rigidbody>().velocity = new Vector3(ufo.speed, 0.0f, 0.0f);
+                UFOLastTime = Time.time;
             }
         }
-        if (allKilled())
-        {
-            GameManager.instance.WinGame();
-        }
-        if (killPlayer())
-        {
-            GameManager.instance.EndGame();
-        }
-        //generate projectiles
-        if(Time.time - lastShootingTime >= (shootingCooldown + Random.Range(-1.5f, 1.5f))){
-            shootProjectile();
-            lastShootingTime = Time.time;
-        }
-        //generate UFO
-        if (Time.time - UFOLastTime >= (UFOCooldown + Random.Range(-3f, 3f)))
-        {
-            Vector3 offset = new Vector3(0.0f, 0.0f, 1.0f);
-            var go = Instantiate(UFO, initPos + offset , Quaternion.Euler(0, 90, 0)) as GameObject;
-            var ufo = go.GetComponent<UFO>();
-            ufo.initPos = go.transform.position;
-            ufo.GetComponent<Rigidbody>().velocity = new Vector3(ufo.speed, 0.0f, 0.0f);
-            UFOLastTime = Time.time;
-        }
+        
     }
 }

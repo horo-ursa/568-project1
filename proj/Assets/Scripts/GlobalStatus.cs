@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SceneId
 {
     public const int OPENING = 0;
@@ -9,15 +10,15 @@ public class SceneId
     public const int LEVEL2 = 2;
     public const int LEVEL3 = 3;
     public const int WIN = 4;
-    public const int LOSE = 5; 
+    public const int LOSE = 5;
+    public const int STORE = 6;
 }
 
 public enum AttackType
 {
-    NEWBEE,
     DOUBLE,
     EXPLOSION,
-    LASER
+    //LASER
 }
 
 public class PlayerAbility
