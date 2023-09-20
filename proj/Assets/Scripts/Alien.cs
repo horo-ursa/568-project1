@@ -6,7 +6,7 @@ public class Alien : MonoBehaviour
 {
     public int pointValue;
     public int damage;
-    public int HP;
+    public float HP;
     public GameObject deathExplosion;
     public AudioClip deathKnell;
     public GameObject projectile;
@@ -20,13 +20,32 @@ public class Alien : MonoBehaviour
 
     private GameObject drop;
 
+    public AudioClip shootAudio;
+
     public void shoot()
     {
+        AudioSource.PlayClipAtPoint(shootAudio, gameObject.transform.position);
         var shootPos = transform.position;
         var proj = Instantiate(projectile, shootPos, Quaternion.identity);
         proj.GetComponent<Projectile>().damage = damage;
         proj.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, bulletSpeed);
     }
+
+    public void takeDamage(float d)
+    {
+        HP -= d;
+        AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
+        if (GameManager.instance.HP < 100)
+        {
+            GameManager.instance.HP = GameManager.instance.LifeSteal + GameManager.instance.HP > 100? 
+                100 : GameManager.instance.LifeSteal + GameManager.instance.HP;
+        }
+        if (HP <= 0)
+        {
+            Die();
+        }
+    }
+
     private void DropItem()
     {
         float rand = Random.Range(0.0f, 100.0f);
@@ -49,7 +68,7 @@ public class Alien : MonoBehaviour
     }
     public void Die()
     {
-        AudioSource.PlayClipAtPoint(deathKnell, gameObject.transform.position);
+        
         Instantiate(deathExplosion, gameObject.transform.position,
         Quaternion.AngleAxis(-90, Vector3.right));
         GameObject obj = GameObject.Find("GameManager");
@@ -67,13 +86,14 @@ public class Alien : MonoBehaviour
         GameObject.Find("EnemyManager").GetComponent<EnemyManager>().removeAlien(this.gameObject);
         this.gameObject.transform.SetParent(null);
         this.gameObject.tag = "DiedAlien";
-        //Destroy(gameObject);
+        GetComponent<Rigidbody>().mass = 0.3f;
 
         float rand = Random.Range(0.0f, 10.0f) / 10.0f;
         if(rand <= GameManager.instance.DropPossibility)
         {
             DropItem();
         }
+        
     }
 
     public void explode()

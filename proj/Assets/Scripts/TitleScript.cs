@@ -22,7 +22,7 @@ void Start()
         // The scene needs to be added into build setting to be loaded!
         if (GUILayout.Button("New Game"))
         {
-            SceneManager.LoadScene("GameplayScene");
+            GameManager.instance.LoadLevelOne();
         }
         if (GUILayout.Button("High score"))
         {

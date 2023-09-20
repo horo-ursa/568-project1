@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3235580151867786905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1401601315730961698}
+  - component: {fileID: 7536345884675059618}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1401601315730961698
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3235580151867786905}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7536345884675059618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3235580151867786905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09403b8ac9a38d140a5ae3f9d2c78682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  gold: 0
+  HP: 0
+  MoveSpeed: 1
+  LifeSteal: 0
+  AttackSpeed: 1
+  DamageMultiplier: 1
+  currentLevel: 0
+  activeAlien1: {fileID: 0}
+  activeAlien2: {fileID: 0}
+  activeAlien3: {fileID: 0}
+  dropItem1: {fileID: 0}
+  dropItem2: {fileID: 0}
+  dropItem3: {fileID: 0}
+  DropPossibility: 0.2
+  hasDouble: 0
+  hasExplosion: 0
+  scoreText: {fileID: 0}
+  goldText: {fileID: 0}
+  PlayerHP: {fileID: 0}
+  currLevel: 0
+  prevLevel: 0
+  Level1Alien1: {fileID: 6541798033162510069, guid: 4e9453ba4bc29d746ba3af9c93fd928e, type: 3}
+  Level1Alien2: {fileID: 3275842871913198799, guid: faf8de3e4de826549b7c0541de4ac754, type: 3}
+  Level1Alien3: {fileID: 8334923725837383969, guid: c5fd7c2517b8e154c9ebbced4c62a4fc, type: 3}
+  Level2Alien1: {fileID: 3254219768500348624, guid: 3ad8f615f96f26542ab0fac6187085c1, type: 3}
+  Level2Alien2: {fileID: 931331126665036371, guid: 5662c306ca2a10b4cb9e782e2820c664, type: 3}
+  Level2Alien3: {fileID: 4000296481352318251, guid: 740f0872cb3a26841b526f7dca30543b, type: 3}
+  Level3Alien1: {fileID: 3258398009259042024, guid: e7ab0c60b66e6824cbc0ed35f465283e, type: 3}
+  Level3Alien2: {fileID: 5027562140771208294, guid: 44804c04cd1ac9f4090f166fee0162f9, type: 3}
+  Level3Alien3: {fileID: 720812156812695518, guid: 3264fc882f12d3e41b86a00a85c74a2a, type: 3}
+  Level1Drop1: {fileID: 1950316580168906605, guid: 1506871aaa38f314594dc4850559a3b7, type: 3}
+  Level1Drop2: {fileID: 6506810482190591175, guid: 675040c1e4293284caab7f8f856abf98, type: 3}
+  Level1Drop3: {fileID: 9185737880485394074, guid: a7e56e191310c8348a949c88f2cf07fe, type: 3}
+  Level2Drop1: {fileID: 702439383746392599, guid: 0f1a4f3087bfc3e469d34c9b89bc322b, type: 3}
+  Level2Drop2: {fileID: 5179884693325711242, guid: fa7321a2dad98cf4e948e62c4c650bcd, type: 3}
+  Level2Drop3: {fileID: 4418754662281557665, guid: 69255ec070181344589fe88fdba68980, type: 3}
+  Level3Drop1: {fileID: 334544177275472301, guid: 45943c4c9d539044d9a0e3e49b3e707d, type: 3}
+  Level3Drop2: {fileID: 7069102754727316972, guid: 246e0b93c07d35345b1804e97751587c, type: 3}
+  Level3Drop3: {fileID: 4757440805115083173, guid: 3950e2e038ea5a5429fd98b4f9cf5a23, type: 3}

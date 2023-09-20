@@ -103,13 +103,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointValue: 30
-  damage: 15
+  damage: 30
+  HP: 15
   deathExplosion: {fileID: 1052565355964372707, guid: 60ba9a730b077ab4d8ef57b6cab09c3f, type: 3}
   deathKnell: {fileID: 8300000, guid: ca0fc9923790fce41a655a77a91c4559, type: 3}
   projectile: {fileID: 592166966341909143, guid: f2924ef56d55b9346998575fb9c3e066, type: 3}
   bulletSpeed: -8
   isAlive: 1
   dieMat: {fileID: 2100000, guid: 385dca9356b1734429c74257922312f4, type: 2}
+  shootAudio: {fileID: 8300000, guid: d9ca5d379daae5a4ba5a8b4ee49296ae, type: 3}
 --- !u!65 &4015093011694264592
 BoxCollider:
   m_ObjectHideFlags: 0

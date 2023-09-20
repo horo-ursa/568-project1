@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
     public float shootingCooldown = 1.0f;
          float lastShootingTime = -1.0f;
 
+
+    public GameObject deathExplosion;
+    public AudioClip shootAudio;
     // Use this for initialization
     void Start()
     {
@@ -29,17 +32,23 @@ public class Player : MonoBehaviour
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-        float moveAmount = horizontalInput * speed * Time.deltaTime;
+        float moveAmount = horizontalInput * speed * GameManager.instance.MoveSpeed * Time.deltaTime;
 
         // Get the new position, clamping it to prevent the ship from moving out of bounds
         float newPositionX = Mathf.Clamp(transform.position.x + moveAmount, minBoundary, maxBoundary);
 
         // Update the position while retaining the current Y and Z values
         transform.position = new Vector3(newPositionX, transform.position.y, transform.position.z);
-        if (Input.GetButtonUp("Fire1") && Time.time - lastShootingTime >= shootingCooldown)
+
+        float attackspeed = GameManager.instance.AttackSpeed + 0.001f;
+        if (attackspeed < 1.0f) attackspeed = 1.0f;
+
+        if (Input.GetButtonUp("Fire1") && (Time.time - lastShootingTime) >= (shootingCooldown / attackspeed))
         {
             Debug.Log("Fire! ");
             lastShootingTime = Time.time;
+
+            AudioSource.PlayClipAtPoint(shootAudio, gameObject.transform.position);
 
             bool SpawnPos1 = true;
             bool SpawnPos2 = false;
@@ -58,12 +67,12 @@ public class Player : MonoBehaviour
 
                 BulletScript b1 = obj1.GetComponent<BulletScript>();
                 b1.initPosition = spawnPosL;
-                b1.damage = damage;
+                b1.damage = damage * GameManager.instance.DamageMultiplier;
                 obj1.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, bulletForce));
 
                 BulletScript b2 = obj1.GetComponent<BulletScript>();
                 b2.initPosition = spawnPosR;
-                b2.damage = damage;
+                b2.damage = damage * GameManager.instance.DamageMultiplier;
                 obj2.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, bulletForce));
 
                 if (GameManager.instance.hasExplosion)
@@ -80,7 +89,7 @@ public class Player : MonoBehaviour
                 // get the Bullet Script Component of the new Bullet instance
                 BulletScript b = obj.GetComponent<BulletScript>();
                 b.initPosition = spawnPos;
-                b.damage = damage;
+                b.damage = damage * GameManager.instance.DamageMultiplier;
                 obj.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, bulletForce));
 
                 if (GameManager.instance.hasExplosion)

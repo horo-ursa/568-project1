@@ -96,9 +96,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
+  bulletForce: 1500
   minBoundary: -2.25
   maxBoundary: 18.25
-  shootingCooldown: 0.2
+  damage: 20
+  shootingCooldown: 0.4
+  deathExplosion: {fileID: 1052565355964372707, guid: 9c707e9dd17d6e14b94dd34c91cebebc, type: 3}
+  shootAudio: {fileID: 8300000, guid: 715620614a6e1cf41aa7b8e22271e09d, type: 3}
   bullet: {fileID: 5811612465304282592, guid: 7091ec298d5b4a84eac5b3ca6c31be6f, type: 3}
 --- !u!65 &5231253356061046012
 BoxCollider:

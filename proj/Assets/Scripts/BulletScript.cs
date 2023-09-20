@@ -9,7 +9,7 @@ public class BulletScript : MonoBehaviour
 
     public bool isExplosion = false;
     public float explosionRadius = 1.0f;
-    public int damage;
+    public float damage;
     // Use this for initialization
     void Start()
     {
@@ -68,8 +68,7 @@ public class BulletScript : MonoBehaviour
                         Alien alienScript = c.GetComponent<Alien>();
                         if (alienScript != null)
                         {
-                            alienScript.Die();
-                            alienScript.GetComponent<Rigidbody>().mass = 0.3f;
+                            alienScript.takeDamage(damage);
                         }
                     }
                 }
@@ -79,12 +78,7 @@ public class BulletScript : MonoBehaviour
                 Alien roid = collider.gameObject.GetComponent<Alien>();
                 // let the other object handle its own death throes
                 Destroy(gameObject);
-                roid.HP -= damage;
-                if(roid.HP <= 0)
-                {
-                    roid.Die();
-                    roid.GetComponent<Rigidbody>().mass = 0.3f;
-                }
+                roid.takeDamage(damage);
                 
             }
         }

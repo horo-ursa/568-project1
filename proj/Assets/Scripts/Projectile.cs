@@ -16,6 +16,8 @@ public class Projectile : MonoBehaviour
         if (collider.CompareTag("Player"))
         {
             GameManager.instance.HP -= damage;
+            var player = collider.GetComponent<Player>();
+            Instantiate(player.deathExplosion, player.transform);
             Destroy(gameObject);
         }
         else if (collider.CompareTag("Barrier"))

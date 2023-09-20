@@ -29,29 +29,29 @@ public class ButtonHandler : MonoBehaviour
 
     public void updateMoveSpeed()
     {
-        if (GameManager.instance.gold >= 150)
+        if (GameManager.instance.gold >= 200)
         {
             GameManager.instance.MoveSpeed *= 1.5f;
-            GameManager.instance.gold -= 180;
+            GameManager.instance.gold -= 200;
         }
     }
 
     public void updateLifeSteal()
     {
-        if (GameManager.instance.gold >= 200)
+        if (GameManager.instance.gold >= 250)
         {
-            GameManager.instance.LifeSteal += 10.0f;
-            GameManager.instance.gold -= 200;
+            GameManager.instance.LifeSteal += 2.0f;
+            GameManager.instance.gold -= 250;
         }
 
     }
 
     public void updateDamage()
     {
-        if (GameManager.instance.gold >= 250)
+        if (GameManager.instance.gold >= 300)
         {
             GameManager.instance.DamageMultiplier *= 1.5f;
-            GameManager.instance.gold -= 250;
+            GameManager.instance.gold -= 300;
         }
     }
 

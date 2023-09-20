@@ -145,6 +145,10 @@ public class EnemyManager : MonoBehaviour
                     Debug.Log("out of boundary");
                     movingRight = false;
                     transform.position += new Vector3(0, 0, -verticalSpeed);
+                    if(transform.position.z < 6)
+                    {
+                        horizontalSpeed *= 1.5f;
+                    }
                 }
             }
             else
@@ -154,6 +158,10 @@ public class EnemyManager : MonoBehaviour
                 {
                     movingRight = true;
                     transform.position += new Vector3(0, 0, -verticalSpeed);
+                    if (transform.position.z < 6)
+                    {
+                        horizontalSpeed *= 1.5f;
+                    }
                 }
             }
 
